@@ -1,0 +1,10 @@
+__pycache__
+dkdata
+*.pyc
+.coverage
+coverage.xml
+htmlcov/
+.idea
+/letterboxd.log
+.vscode
+.venv

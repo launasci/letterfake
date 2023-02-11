@@ -1,0 +1,85 @@
+{
+  "usuarios": [
+    {
+      "id": 0,
+      "email": "lalal@g.com"
+    },
+    {
+      "nome": "ada",
+      "email": "teste@gmail.com",
+      "senha": "kajsakjdjahda",
+      "id": 1
+    },
+    {
+      "nome": "ada",
+      "email": "teste@gmail.com",
+      "senha": "kajsakjdjahda",
+      "id": 2
+    },
+    {
+      "nome": "afsfsfsf",
+      "email": "sefgsfse@gmail.com",
+      "senha": "kadhadjahdadh",
+      "id": 3
+    },
+    {
+      "nome": "",
+      "email": "",
+      "senha": "",
+      "id": 4
+    },
+    {
+      "nome": "",
+      "email": "",
+      "senha": "",
+      "id": 5
+    },
+    {
+      "nome": "",
+      "email": "",
+      "senha": "",
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 9
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 10
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 11
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 12
+    },
+    {
+      "username": "",
+      "password": "",
+      "id": 13
+    }
+  ],
+  "filmes": [
+    {
+      "titulo": "testa mudança de arquivo",
+      "descricao": "testando buscador de tarefas",
+      "status": "Concluida",
+      "categoria": "Drama",
+      "imagem": "https://br.web.img3.acsta.net/pictures/22/11/30/19/53/5856320.jpg",
+      "id": 0
+    }
+  ]
+}
