@@ -1,93 +1,63 @@
-# 1. Dev-env, super-easy mode (docker all things)
+# LetterFake
+## [Video do projeto LetterFake](https://drive.google.com/file/d/1wts2voPos7j3guxRpidMIDeGsoxs5feC/view?usp=share_link)
 
-Requirements:
-- [Install docker](https://docs.docker.com/install/)
-- Learn [Python](https://docs.python.org/3/tutorial/) and [Django](https://docs.djangoproject.com/en/2.0/intro/tutorial01/)
-- Learn [vue.js](vuejs.org)
-- Learn [Nuxt.js](https://nuxtjs.org/)
-- Get familiar with [Vuetify.js](vuetifyjs.com/) components
 
-Step by step
+LetterFake é um projeto inspirado no site LetterBoxd, onde o usuário pode adicionar filmes ou séries que já assistiu e indicar se viu, quer ver ou se não tem interesse. Além disso, é possível adicionar tags, categorias, comentários e imagens aos filmes e séries cadastrados.
 
-```bash
-source dev.sh  # import useful bash functions
-devhelp  # like this one ;)
-dkbuild  # builds the docker image for this project. The first time Will take a while.
-dknpminstall  # I'll explain later!
-dkup  # Brings up everything
-```
 
-With `dkup` running, open another terminal
+## Funcionalidades
 
-```bash
-dk bash  # starts bash inside "letterboxd" container
-./manage.py migrate  # create database tables and stuff
-./manage.py createsuperuser  # creates an application user in the database
-```
+- Adicionar filmes ou séries;
+- Visualizar lista de filmes e séries cadastrados;
+- Editar filmes ou séries já cadastrados;
+- Remover filmes ou séries cadastrados;
+- Adicionar tags, categorias, comentários e imagens aos filmes e séries cadastrados.
 
-What is happenning:
+## Tecnologias
 
-* `dev.sh` is a collection of useful bash functions for this project's development environment. You're encouraged to look inside and see how that works, and add more as the project progresses.
-* `dknpminstall` will start a docker container and run `npm install` inside to download node dependencies to the `frontend/node_modules` folder. Using docker for this means you don't need to worry about installing (and choosing version for) node/npm.
-* `dkup` uses docker-compose to start 3 containers: postgres, nginx, and letterboxd.
-* The dockerized postgres saves its state into `docker/dkdata`. You can delete that if you want your dev database to go kaboom.
-* Once `dkup` is running, `dk <command>` will run `<command>` inside the `letterboxd` container. So `dk bash` will get you "logged in" as root inside that container. Once inside, you need to run Django's `manage.py` commands to initialize the database properly.
-* The letterboxd container runs 3 services:
- * django on port 8000
- * nuxt frontend with real APIs on port 3000
- * nuxt frontend with mock APIs on port 3001
-* nginx is configured to listen on port 80 and redirect to 8000 (requests going to `/api/*`) or 3000 (everything else).
-* Therefore, when `dkup` is running, you get a fully working dev-environment by pointing your browser to http://localhost, and a frontend-only-mock-api-based environment by pointing your browser to http://localhost:3001. Each one is more useful on different situations.
-* You're supposed to create features first by implementing them on 3001, then validate them, and only then write the backend APIs and integrate them. Experience shows this process is very productive.
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-# 2. Dev-env, normal-easy mode (dockerize nginx + postgres)
+- Python
+- Django
+- HTML
+- CSS
+- JavaScript
+- PostgreSQL
 
-Running everything inside docker is a quick and easy way to get started, but sometimes we need to run things "for real", for example, when you need to debug python code.
+## Como executar o projeto
 
-## Python setup
+Para executar o projeto, é necessário ter o Docker e o Docker Compose instalados em sua máquina. Com essas ferramentas instaladas, siga os passos abaixo:
 
-Requirements:
- - Understand about python [virtualenvs](https://docs.python.org/3/tutorial/venv.html)
- - Install [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) (not required, but recommended)
+1. Clone este repositório em sua máquina;
 
-Step by step
+2. Navegue até o diretório raiz do projeto;
 
-```bash
-dkpgnginx  # Starts postgres and nginx inside docker
-```
+3. Inicie os containers com o comando `docker-compose build` e depois `docker-compose up`;
 
-With `dkpgnginx` running, start another terminal:
+4. Depois que os containers tiverem rodando em outro terminal de o comando: `docker-ps` e pegue o id do container
 
-```bash
-mkvirtualenv letterboxd -p python3  # creates a python3 virtualenv
-pip install -r requirements.txt  # install python dependencies inside virtualenv
-export DJANGO_DB_PORT=5431  # That's where our dockerized postgres is listening
-./manage.py runserver  # starts django on port 8000
-```
+![exemplo id do container letterboxd](frontend/static/id_container.png)
 
-Since nginx is also running you go ahead and point your browser to http://localhost/admin and you should see the same thing as in http://localhost:8000/admin
+5. Depois de salvar o id do container, rode o seguinte comando: `docker exec -it ID DO CONTAINER /bin/bash`. Esse comando serve para entrar no container do projeto e depois disso rode: `./manage.py createsuperuser`
 
-## Node Setup
+6. Nesse momento você irá criar um super-usuário, adicione suas credenciais e é importante ser algo que você lembre ou algo como:
 
-Requirements:
+- name: admin
+- email: admin@admin.com
+- senha: adminadmin
 
-* Install [nvm](https://github.com/creationix/nvm) (not required, but highly recommended)
+### **Observação:** O projeto atualmente não possui um sistema de cadastro de usuários, então é necessário criar um usuário administrador usando o comando acima para ter acesso à área de administração e ao API.
 
-Step by step:
+7. Feito isso, ainda dentro do container rode `./manage.py migrate` para gerar as tabelas do banco de dado
 
-```bash
-nvm use 9  # Switch your terminal for node version 9.x
-# no need to npm install anything, we already have our node_modules folder
-sudo chmod -R o+rw .nuxt/  # I'll explain this later
-npm run dev  # Starts nuxt frontend on port 3000
-```
+8. Com o usuario criado e as migrações criadas, acesse o projeto em ´localhost/inicio´, faça login com o usuário criado e adicione/edite/exclua os filmes e séries que quiser! 
 
-You can go ahed and point your browser to http://localhost:3000 to see nuxt running **with mocked apis**
+Para parar os containers, basta executar o comando `docker-compose down`.
 
-To run nuxt using real APIs just turn set this environment variable API_MOCK=0
+### **Observações:**
+- O projeto atualmente não tem apimock, mas possui o JSON Server integrado para fornecer os dados de exemplo.
+- Verifique o arquivo `.env` para ver as variáveis de ambiente necessárias.
 
-```bash
-API_MOCK=0 npm run dev  # Starts nuxt frontend on port 3000
-```
-
-Since nginx is also running you go ahead and point your browser to http://localhost/ and you should have a fully integrated frontend+backend dev env.
+### **Créditos**
+- Template Original [Djavue](https://github.com/evolutio/djavue): [Tony Lâmpada](https://github.com/tonylampada)
+- Template [Djavue3](https://github.com/huogerac/djavue): [Roger Camargo](https://github.com/huogerac)
