@@ -46,7 +46,7 @@ Para executar o projeto, é necessário ter o Docker e o Docker Compose instalad
 - email: admin@admin.com
 - senha: adminadmin
 
-### **Observação:** O projeto atualmente não possui um sistema de cadastro de usuários, então é necessário criar um usuário administrador usando o comando acima para ter acesso à área de administração e ao API.
+**Observação:** O projeto atualmente não possui um sistema de cadastro de usuários, então é necessário criar um usuário administrador usando o comando acima para ter acesso à área de administração e ao API.
 
 7. Feito isso, ainda dentro do container rode `./manage.py migrate` para gerar as tabelas do banco de dado
 
@@ -54,10 +54,10 @@ Para executar o projeto, é necessário ter o Docker e o Docker Compose instalad
 
 Para parar os containers, basta executar o comando `docker-compose down`.
 
-### **Observações:**
+ **Observações:**
 - O projeto atualmente não tem apimock, mas possui o JSON Server integrado para fornecer os dados de exemplo.
 - Verifique o arquivo `.env` para ver as variáveis de ambiente necessárias.
 
-### **Créditos**
+####  **Créditos**
 - Template Original [Djavue](https://github.com/evolutio/djavue): [Tony Lâmpada](https://github.com/tonylampada)
 - Template [Djavue3](https://github.com/huogerac/djavue): [Roger Camargo](https://github.com/huogerac)
