@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
     path('whoami', views.whoami),
+    path('cadastro', views.cadastro),
 
     path("letterboxd/filmes", views.filmes),
     path("letterboxd/adicionar", views.adicionar_filmes),

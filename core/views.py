@@ -2,7 +2,9 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.contrib import auth
+from django.contrib.auth.models import User
 from commons.django_views_utils import ajax_login_required
+from django.views.decorators.http import require_POST
 from core.service import log_svc
 from django.views.decorators.csrf import csrf_exempt
 from core.models import Filme
@@ -34,6 +36,14 @@ def logout(request):
     auth.logout(request)
     return HttpResponse('{}', content_type='application/json')
 
+@require_POST
+def cadastro(request):
+    username=request.POST['username']
+    email=request.POST['email']
+    senha=request.POST['senha']
+    novo_usuario = User.objects.create_user(username=username, email=email, password=senha)
+    novo_usuario.save()
+    return JsonResponse({})
 
 def whoami(request):
     i_am = {

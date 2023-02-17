@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+const _apimock = process.env.API_MOCK == '1' || (process.env.API_MOCK == undefined && process.env.npm_lifecycle_event == 'dev')
+const _apijs = _apimock ? 'apimock.js' : 'api.js';
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -71,5 +73,19 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  }, 
+  extend (config, { isDev, isClient }) {
+      home = config.resolve.alias['~'];
+      config.resolve.alias['~apijs'] = home + '/components/api/' + _apijs;
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
+    }
+
+
 }

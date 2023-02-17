@@ -6,7 +6,6 @@
         offset="1"
       >
         <v-img
-          class="home-img"
           :src="require('../static/img-home.png')"
         />
       </v-col>
@@ -60,7 +59,7 @@
 </template>
 
 <script>
-import AuthApi from '@/api/auth.api.js'
+import api from "@/api/api.js";
 
 export default {
   name: 'InicioPage',
@@ -81,7 +80,7 @@ export default {
   methods: {
     login () {
       this.loading = true
-      AuthApi.login(this.username, this.password)
+      api.login(this.username, this.password)
         .then((user) => {
           if (!user) {
             this.snackbar.message = 'Usuário ou senha invalida'

@@ -58,6 +58,9 @@ Para parar os containers, basta executar o comando `docker-compose down`.
 - O projeto atualmente não tem apimock, mas possui o JSON Server integrado para fornecer os dados de exemplo.
 - Verifique o arquivo `.env` para ver as variáveis de ambiente necessárias.
 
+**O tal da rota automatica do nuxt** 
+- Ainda não consegui resolver a questão das rotas automaticas que o nuxt cria então a primeira aba do projeto, tela inicial de login, é `localhost/inicio`. Quando você subir o projeto vai ser direcionado apenas para a `localhost` basta adicionar `/inicio` e você estará na tela de login.
+
 ####  **Créditos**
 - Template Original [Djavue](https://github.com/evolutio/djavue): [Tony Lâmpada](https://github.com/tonylampada)
 - Template [Djavue3](https://github.com/huogerac/djavue): [Roger Camargo](https://github.com/huogerac)

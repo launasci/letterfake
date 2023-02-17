@@ -8,7 +8,7 @@
         <v-text-field
           v-model="pesquisa"
           color="deep-orange darken-1"
-          loading
+          :loading="loading"
           placeholder="Encontre um filme ou serie"
         /><porcentagem-categorias :porcentagem="porcentagem" />
 
@@ -121,7 +121,8 @@ export default {
     return {
       pesquisa: "",
       show: false,
-      listCardShow: []
+      listCardShow: [], 
+      loading: false
     };
   },
 
