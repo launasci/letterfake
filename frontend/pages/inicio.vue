@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import api from "@/api/api.js";
+import AuthApi from '@/api/auth.api.js'
 
 export default {
   name: 'InicioPage',
@@ -80,7 +80,7 @@ export default {
   methods: {
     login () {
       this.loading = true
-      api.login(this.username, this.password)
+      AuthApi.login(this.username, this.password)
         .then((user) => {
           if (!user) {
             this.snackbar.message = 'Usuário ou senha invalida'
